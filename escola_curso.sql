@@ -3437,10 +3437,23 @@ inner join
 
 -- 49. Relatório de frequência do aluno. Crie uma consulta para exibir: nome do aluno; nome da disciplina; data da aula; conteúdo da aula; presença; justificativa. 
 -- Tabelas envolvidas: aluno, matricula, disciplina, aula, frequência.
-select * from aula;
-select * from aluno;
-select * from matricula;
-select * from frequencia;
+select 
+	a.nome as nome_aluno,
+	d.nome as nome_disciplina,
+	au.data_aula,
+	au.conteudo as conteudo_aula,
+	f.presenca,
+	f.justificativa
+from 
+	frequencia f 
+inner join
+	aula au on au.codigo_aula = f.codigo_aula 
+inner join 
+	disciplina d on d.codigo_disciplina = au.codigo_disciplina 
+inner join 
+	matricula m on m.codigo_matricula = f.codigo_matricula 
+inner join 
+	aluno a on a.codigo_aluno = m.codigo_aluno;
 
 -- 50. Relatório de certificados emitidos. Crie uma consulta para exibir: nome do aluno; nome do curso; nome da turma; data de emissão; código de verificação; 
 -- situação do certificado. Tabelas envolvidas: aluno, matricula, turma, curso, certificado
