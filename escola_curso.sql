@@ -3457,12 +3457,20 @@ inner join
 
 -- 50. Relatório de certificados emitidos. Crie uma consulta para exibir: nome do aluno; nome do curso; nome da turma; data de emissão; código de verificação; 
 -- situação do certificado. Tabelas envolvidas: aluno, matricula, turma, curso, certificado
-
-
-
-
-
-
-
-
-
+select
+	a.nome as nome_aluno,
+	c.nome as nome_curso,
+	t.nome as nome_turma,
+	ce.data_emissao,
+	ce.codigo_verificacao,
+	ce.situacao as situacao_certificado
+from
+	certificado ce
+inner join 
+	matricula m on m.codigo_matricula = ce.codigo_matricula 
+inner join 
+	turma t on t.codigo_turma = m.codigo_turma 
+inner join 
+	curso c on c.codigo_curso = t.codigo_curso 
+inner join 
+	aluno a on a.codigo_aluno = m.codigo_aluno;
