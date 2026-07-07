@@ -23,7 +23,7 @@ BEGIN;
 
 LOCK TABLE aluno IN EXCLUSIVE MODE;
 
-INSERT INTO aluno VALUES 
+INSERT INTO aluno (codigo_aluno, nome, cpf, rg, data_nascimento, sexo, email, telefone, cep, logradouro, numero, bairro, cidade, estado, complemento, data_cadastro, situacao) VALUES 
 (1,'Lucas Martins','10000000001','RG001','2011-02-03','M','aluno01@email.com','85999991001','60000001','Rua A','11','Centro','Fortaleza','CE',NULL,'2026-01-05','Ativo'),
 (2,'Fernanda Costa','10000000002','RG002','2010-03-05','F','aluno02@email.com','85999991002','60000002','Rua B','12','Aldeota','Fortaleza','CE',NULL,'2026-01-05','Ativo'),
 (3,'Ricardo Souza','10000000003','RG003','2011-04-07','M','aluno03@email.com','85999991003','60000003','Rua C','13','Meireles','Fortaleza','CE',NULL,'2026-01-05','Ativo'),
@@ -102,7 +102,7 @@ BEGIN;
 -- Lock na tabela responsavel que será liberado automaticamente no COMMIT
 LOCK TABLE responsavel IN EXCLUSIVE MODE;
 
-INSERT INTO responsavel VALUES 
+INSERT INTO responsavel (codigo_responsavel, nome, cpf, rg, telefone, email, parentesco, cep, logradouro, numero, bairro, cidade, estado, complemento) VALUES 
 (1,'Responsável Costa 1','90000000001','RGR001','85988880001','responsavel01@email.com','Mãe','60100001','Rua Responsável 1','101','Aldeota','Fortaleza','CE',NULL),
 (2,'Responsável Souza 2','90000000002','RGR002','85988880002','responsavel02@email.com','Pai','60100002','Rua Responsável 2','102','Meireles','Fortaleza','CE',NULL),
 (3,'Responsável Lima 3','90000000003','RGR003','85988880003','responsavel03@email.com','Mãe','60100003','Rua Responsável 3','103','Varjota','Fortaleza','CE',NULL),
@@ -143,7 +143,7 @@ BEGIN;
 -- Lock na tabela que será liberado automaticamente no COMMIT
 LOCK TABLE aluno_responsavel IN EXCLUSIVE MODE;
 
-INSERT INTO aluno_responsavel VALUES 
+INSERT INTO aluno_responsavel (codigo_aluno, codigo_responsavel, tipo_responsavel, responsavel_financeiro, responsavel_pedagogico) VALUES 
 (1, 1, 'Mãe', TRUE, TRUE),
 (2, 1, 'Mãe', FALSE, TRUE),
 (2, 2, 'Pai', TRUE, TRUE),
@@ -180,7 +180,7 @@ BEGIN;
 -- Lock na tabela que será liberado automaticamente no COMMIT
 LOCK TABLE curso IN EXCLUSIVE MODE;
 
-INSERT INTO curso VALUES 
+INSERT INTO curso (codigo_curso, nome, descricao, carga_horaria, valor_mensalidade, duracao_meses, situacao) VALUES 
 (1,'Informática Básica','Fundamentos de informática, sistemas operacionais e internet',60,180.00,3,'Ativo'),
 (2,'Excel Profissional','Planilhas, fórmulas, gráficos e dashboards',80,220.00,4,'Ativo'),
 (3,'Desenvolvimento Web','Criação de páginas com HTML, CSS e JavaScript',120,280.00,6,'Ativo'),
@@ -217,7 +217,7 @@ BEGIN;
 -- Lock na tabela que será liberado automaticamente no COMMIT
 LOCK TABLE turma IN EXCLUSIVE MODE;
 
-INSERT INTO turma VALUES 
+INSERT INTO turma (codigo_turma, codigo_curso, nome, ano, semestre, quantidade_vagas, situacao) VALUES 
 (1, 1, 'INF2026.1', 2026, 1, 30, 'Em andamento'),
 (2, 1, 'INF2026.2', 2026, 2, 25, 'Concluída'),
 (3, 2, 'EXC2026.1', 2026, 1, 20, 'Em andamento'),
@@ -266,7 +266,7 @@ BEGIN;
 -- Lock na tabela que será liberado automaticamente no COMMIT
 LOCK TABLE professor IN EXCLUSIVE MODE;
 
-INSERT INTO professor VALUES 
+INSERT INTO professor (codigo_professor, nome, cpf, rg, data_nascimento, email, telefone, formacao, especialidade, data_contratacao, valor_hora_aula, carga_horaria_mensal, situacao) VALUES 
 (1,'João Silva','11111111111','RG111','1985-01-10','joao.silva@escola.com','85999990001','Sistemas de Informação','Banco de Dados','2024-01-10',45.00,80,'Ativo'),
 (2,'Maria Souza','22222222222','RG222','1988-05-20','maria.souza@escola.com','85999990002','Ciência da Computação','Desenvolvimento Web','2024-02-01',50.00,100,'Ativo'),
 (3,'Carlos Lima','33333333333','RG333','1982-03-15','carlos.lima@escola.com','85999990003','Administração','Excel','2023-08-01',40.00,60,'Ativo'),
@@ -310,7 +310,7 @@ BEGIN;
 -- Lock na tabela que será liberado automaticamente no COMMIT
 LOCK TABLE disciplina IN EXCLUSIVE MODE;
 
-INSERT INTO disciplina VALUES 
+INSERT INTO disciplina (codigo_disciplina, codigo_turma, codigo_professor, nome, descricao, carga_horaria, ordem, situacao) VALUES 
 (1,1,5,'Sistemas Operacionais','Disciplina Sistemas Operacionais da turma 1',20,1,'Ativa'),
 (2,1,15,'Internet e Segurança','Disciplina Internet e Segurança da turma 1',20,2,'Ativa'),
 (3,1,3,'Pacote Office','Disciplina Pacote Office da turma 1',40,3,'Ativa'),
@@ -393,7 +393,7 @@ CREATE INDEX idx_aula_codigo_disciplina ON aula (codigo_disciplina);
 
 BEGIN;
 
-INSERT INTO "aula" VALUES 
+INSERT INTO "aula" (codigo_aula, codigo_disciplina, data_aula, hora_inicio, hora_fim, conteudo, observacao) VALUES 
 (1,1,'2026-03-06','19:00:00','21:00:00','Conteúdo 1 da disciplina Sistemas Operacionais',NULL),
 (2,1,'2026-03-13','19:00:00','21:00:00','Conteúdo 2 da disciplina Sistemas Operacionais',NULL),
 (3,1,'2026-03-20','19:00:00','21:00:00','Conteúdo 3 da disciplina Sistemas Operacionais',NULL),
@@ -651,7 +651,7 @@ BEGIN;
 -- Lock na tabela que será liberado automaticamente no COMMIT
 LOCK TABLE sala IN EXCLUSIVE MODE;
 
-INSERT INTO sala VALUES 
+INSERT INTO sala (codigo_sala, nome, capacidade, tipo, localizacao, situacao) VALUES 
 (1,'Laboratório 01',30,'Laboratório de informática','Bloco A - térreo','Ativa'),
 (2,'Laboratório 02',25,'Laboratório de informática','Bloco A - 1º andar','Ativa'),
 (3,'Laboratório Hardware',20,'Laboratório técnico','Bloco C','Ativa'),
@@ -685,7 +685,7 @@ BEGIN;
 -- Lock na tabela que será liberado automaticamente no COMMIT
 LOCK TABLE matricula IN EXCLUSIVE MODE;
 
-INSERT INTO matricula VALUES 
+INSERT INTO matricula (codigo_aluno, codigo_turma, data_matricula, situacao) VALUES 
 (1,1,1,'2026-03-01','Concluído'), (2,2,1,'2026-03-01','Concluído'), (3,3,1,'2026-03-01','Concluído'), 
 (4,4,1,'2026-01-10','Concluído'), (5,5,1,'2026-01-10','Concluído'), (6,6,1,'2026-01-10','Concluído'), 
 (7,7,1,'2026-01-10','Ativa'), (8,8,1,'2026-01-10','Ativa'), (9,9,1,'2026-01-10','Ativa'), 
@@ -740,7 +740,7 @@ BEGIN;
 -- Lock na tabela que será liberado automaticamente no COMMIT
 LOCK TABLE resultado_disciplina IN EXCLUSIVE MODE;
 
-INSERT INTO resultado_disciplina VALUES 
+INSERT INTO resultado_disciplina (codigo_resultado, codigo_matricula, codigo_disciplina, media_final, percentual_frequencia, situacao, observacao) VALUES 
 (1,1,1,8.20,100.00,'Aprovado',NULL), (2,1,2,7.95,100.00,'Aprovado',NULL), (3,1,3,9.40,100.00,'Aprovado',NULL), 
 (4,2,1,8.95,100.00,'Aprovado',NULL), (5,2,2,8.35,100.00,'Aprovado',NULL), (6,2,3,8.45,100.00,'Aprovado',NULL), 
 (7,3,1,9.30,100.00,'Aprovado',NULL), (8,3,2,8.95,100.00,'Aprovado',NULL), (9,3,3,9.20,100.00,'Aprovado',NULL), 
@@ -847,7 +847,7 @@ BEGIN;
 
 LOCK TABLE mensalidade IN EXCLUSIVE MODE;
 
-INSERT INTO mensalidade VALUES 
+INSERT INTO mensalidade (codigo_mensalidade, codigo_matricula, numero_parcela, data_vencimento, data_pagamento, valor, valor_pago, situacao, forma_pagamento) VALUES 
 (1,1,1,'2026-02-09','2026-02-07',180.00,180.00,'Paga','Cartão de crédito'),
 (2,1,2,'2026-03-11','2026-03-08',180.00,180.00,'Paga','Pix'),
 (3,1,3,'2026-04-10','2026-04-10',180.00,180.00,'Paga','Pix'),
@@ -1206,77 +1206,6 @@ CREATE TABLE disciplina (
 CREATE INDEX idx_disciplina_turma ON disciplina (codigo_turma);
 CREATE INDEX idx_disciplina_professor ON disciplina (codigo_professor);
 
-BEGIN;
-
-LOCK TABLE disciplina IN EXCLUSIVE MODE;
-
-INSERT INTO disciplina VALUES 
-(1,1,5,'Sistemas Operacionais','Disciplina Sistemas Operacionais da turma 1',20,1,'Ativa'),
-(2,1,15,'Internet e Segurança','Disciplina Internet e Segurança da turma 1',20,2,'Ativa'),
-(3,1,3,'Pacote Office','Disciplina Pacote Office da turma 1',40,3,'Ativa'),
-(4,2,5,'Sistemas Operacionais','Disciplina Sistemas Operacionais da turma 2',20,1,'Ativa'),
-(5,2,15,'Internet e Segurança','Disciplina Internet e Segurança da turma 2',20,2,'Ativa'),
-(6,2,3,'Pacote Office','Disciplina Pacote Office da turma 2',40,3,'Ativa'),
-(7,3,3,'Excel Básico','Disciplina Excel Básico da turma 3',20,1,'Ativa'),
-(8,3,3,'Excel Intermediário','Disciplina Excel Intermediário da turma 3',20,2,'Ativa'),
-(9,3,3,'Dashboards no Excel','Disciplina Dashboards no Excel da turma 3',40,3,'Ativa'),
-(10,4,3,'Excel Básico','Disciplina Excel Básico da turma 4',20,1,'Ativa'),
-(11,4,3,'Excel Intermediário','Disciplina Excel Intermediário da turma 4',20,2,'Ativa'),
-(12,4,3,'Dashboards no Excel','Disciplina Dashboards no Excel da turma 4',40,3,'Ativa'),
-(13,5,2,'HTML e CSS','Disciplina HTML e CSS da turma 5',20,1,'Ativa'),
-(14,5,2,'JavaScript','Disciplina JavaScript da turma 5',20,2,'Ativa'),
-(15,5,11,'Projeto Web','Disciplina Projeto Web da turma 5',40,3,'Ativa'),
-(16,6,2,'HTML e CSS','Disciplina HTML e CSS da turma 6',20,1,'Ativa'),
-(17,6,2,'JavaScript','Disciplina JavaScript da turma 6',20,2,'Ativa'),
-(18,6,11,'Projeto Web','Disciplina Projeto Web da turma 6',40,3,'Ativa'),
-(19,7,1,'Modelagem de Dados','Disciplina Modelagem de Dados da turma 7',20,1,'Ativa'),
-(20,7,1,'SQL','Disciplina SQL da turma 7',20,2,'Ativa'),
-(21,7,1,'Administração Básica de BD','Disciplina Administração Básica de BD da turma 7',40,3,'Ativa'),
-(22,8,1,'Modelagem de Dados','Disciplina Modelagem de Dados da turma 8',20,1,'Ativa'),
-(23,8,1,'SQL','Disciplina SQL da turma 8',20,2,'Ativa'),
-(24,8,1,'Administração Básica de BD','Disciplina Administração Básica de BD da turma 8',40,3,'Ativa'),
-(25,9,4,'Fundamentos do Design','Disciplina Fundamentos do Design da turma 9',20,1,'Ativa'),
-(26,9,4,'Edição de Imagens','Disciplina Edição de Imagens da turma 9',20,2,'Ativa'),
-(27,9,12,'Projeto Visual','Disciplina Projeto Visual da turma 9',40,3,'Ativa'),
-(28,10,4,'Fundamentos do Design','Disciplina Fundamentos do Design da turma 10',20,1,'Cancelada'),
-(29,10,4,'Edição de Imagens','Disciplina Edição de Imagens da turma 10',20,2,'Cancelada'),
-(30,10,12,'Projeto Visual','Disciplina Projeto Visual da turma 10',40,3,'Cancelada'),
-(31,11,6,'Redes Sociais','Disciplina Redes Sociais da turma 11',20,1,'Ativa'),
-(32,11,6,'Produção de Conteúdo','Disciplina Produção de Conteúdo da turma 11',20,2,'Ativa'),
-(33,11,6,'Campanhas Digitais','Disciplina Campanhas Digitais da turma 11',40,3,'Ativa'),
-(34,12,6,'Redes Sociais','Disciplina Redes Sociais da turma 12',20,1,'Ativa'),
-(35,12,6,'Produção de Conteúdo','Disciplina Produção de Conteúdo da turma 12',20,2,'Ativa'),
-(36,12,6,'Campanhas Digitais','Disciplina Campanhas Digitais da turma 12',40,3,'Ativa'),
-(37,13,8,'Rotinas Administrativas','Disciplina Rotinas Administrativas da turma 13',20,1,'Ativa'),
-(38,13,10,'Atendimento e Documentos','Disciplina Atendimento e Documentos da turma 13',20,2,'Ativa'),
-(39,13,14,'Noções de Finanças','Disciplina Noções de Finanças da turma 13',40,3,'Ativa'),
-(40,14,8,'Rotinas Administrativas','Disciplina Rotinas Administrativas da turma 14',20,1,'Ativa'),
-(41,14,10,'Atendimento e Documentos','Disciplina Atendimento e Documentos da turma 14',20,2,'Ativa'),
-(42,14,14,'Noções de Finanças','Disciplina Noções de Finanças da turma 14',40,3,'Ativa'),
-(43,15,13,'Lógica com Python','Disciplina Lógica com Python da turma 15',20,1,'Ativa'),
-(44,15,9,'Estruturas de Dados','Disciplina Estruturas de Dados da turma 15',20,2,'Ativa'),
-(45,15,9,'Automação com Python','Disciplina Automação com Python da turma 15',40,3,'Ativa'),
-(46,16,13,'Lógica com Python','Disciplina Lógica com Python da turma 16',20,1,'Ativa'),
-(47,16,9,'Estruturas de Dados','Disciplina Estruturas de Dados da turma 16',20,2,'Ativa'),
-(48,16,9,'Automação com Python','Disciplina Automação com Python da turma 16',40,3,'Ativa'),
-(49,17,7,'Montagem de Computadores','Disciplina Montagem de Computadores da turma 17',20,1,'Ativa'),
-(50,17,7,'Manutenção Preventiva','Disciplina Manutenção Preventiva da turma 17',20,2,'Ativa'),
-(51,17,7,'Diagnóstico de Hardware','Disciplina Diagnóstico de Hardware da turma 17',40,3,'Ativa'),
-(52,18,7,'Montagem de Computadores','Disciplina Montagem de Computadores da turma 18',20,1,'Ativa'),
-(53,18,7,'Manutenção Preventiva','Disciplina Manutenção Preventiva da turma 18',20,2,'Ativa'),
-(54,18,7,'Diagnóstico de Hardware','Disciplina Diagnóstico de Hardware da turma 18',40,3,'Ativa'),
-(55,19,10,'Comunicação Profissional','Disciplina Comunicação Profissional da turma 19',20,1,'Ativa'),
-(56,19,10,'Relacionamento com Cliente','Disciplina Relacionamento com Cliente da turma 19',20,2,'Ativa'),
-(57,19,10,'Ética no Atendimento','Disciplina Ética no Atendimento da turma 19',40,3,'Ativa'),
-(58,20,2,'HTML e CSS','Disciplina HTML e CSS da turma 20',20,1,'Ativa'),
-(59,20,2,'JavaScript','Disciplina JavaScript da turma 20',20,2,'Ativa'),
-(60,20,11,'Projeto Web','Disciplina Projeto Web da turma 20',40,3,'Ativa');
-
--- Atualizando a sequência do AUTO_INCREMENT (IDENTITY) para o Postgres
-SELECT setval(pg_get_serial_sequence('disciplina', 'codigo_disciplina'), COALESCE(MAX(codigo_disciplina), 1)) FROM disciplina;
-
-COMMIT;
-
 CREATE TABLE avaliacao (
   codigo_avaliacao INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
   codigo_disciplina INT NOT NULL,
@@ -1293,7 +1222,7 @@ BEGIN;
 
 LOCK TABLE avaliacao IN EXCLUSIVE MODE;
 
-INSERT INTO avaliacao VALUES 
+INSERT INTO avaliacao (codigo_avaliacao, codigo_disciplina, descricao, data_avaliacao, valor_maximo) VALUES 
 (1,1,'Avaliação 1','2026-03-22',10.00),
 (2,1,'Projeto Final','2026-04-19',10.00),
 (3,2,'Avaliação 1','2026-03-22',10.00),
@@ -1438,7 +1367,7 @@ BEGIN;
 
 LOCK TABLE nota IN EXCLUSIVE MODE;
 
-INSERT INTO nota VALUES 
+INSERT INTO nota (codigo_nota, codigo_avaliacao, codigo_matricula, nota, observacao) VALUES 
 (1,1,1,7.40,NULL),
 (2,2,1,9.00,NULL),
 (3,3,1,8.80,NULL),
@@ -1942,7 +1871,7 @@ BEGIN;
 
 LOCK TABLE certificado IN EXCLUSIVE MODE;
 
-INSERT INTO certificado VALUES 
+INSERT INTO certificado (codigo_certificado, codigo_matricula, data_emissao, codigo_verificacao, carga_horaria_total, situacao, observacao) VALUES 
 (1,1,'2026-07-15','CERT-2026-00001',60,'Emitido',NULL),
 (2,2,'2026-07-15','CERT-2026-00002',60,'Emitido',NULL),
 (3,3,'2026-07-15','CERT-2026-00003',60,'Emitido',NULL),
@@ -2970,7 +2899,7 @@ ALTER SEQUENCE "horario_turma_codigo_horario_seq" RESTART WITH 41;
 
 BEGIN;
 
-INSERT INTO "horario_turma" VALUES 
+INSERT INTO "horario_turma" (codigo_horario, codigo_turma, codigo_sala, dia_semana, hora_inicio, hora_fim) VALUES 
 (1,1,1,'Segunda-feira','19:00:00','21:00:00'),
 (2,1,1,'Quarta-feira','19:00:00','21:00:00'),
 (3,2,2,'Quarta-feira','19:00:00','21:00:00'),
